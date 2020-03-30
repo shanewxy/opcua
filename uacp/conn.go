@@ -180,6 +180,20 @@ func (c *Conn) SetDeadline(t time.Time) error {
 	return c.c.SetDeadline(t)
 }
 
+func (c *Conn) SetReadBuffer(bytes int) error {
+	if tc, ok := c.c.(*net.TCPConn); ok {
+		return tc.SetReadBuffer(bytes)
+	}
+	return nil
+}
+
+func (c *Conn) SetWriteBuffer(bytes int) error {
+	if tc, ok := c.c.(*net.TCPConn); ok {
+		return tc.SetWriteBuffer(bytes)
+	}
+	return nil
+}
+
 func (c *Conn) SetReadDeadline(t time.Time) error {
 	return c.c.SetReadDeadline(t)
 }
